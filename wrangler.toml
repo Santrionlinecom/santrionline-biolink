@@ -1,0 +1,16 @@
+name = "santrionline-biolink"
+compatibility_date = "2026-06-30"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+
+[[d1_databases]]
+binding = "BIOLINK_DB"
+database_name = "santrionline-biolink-db"
+database_id = "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID"
+
+[vars]
+PUBLIC_SITE_URL = "https://santrionline.my.id"
+PUBLIC_SITE_NAME = "SantriOnline Links"
+ADMIN_EMAIL = "masyogik@santrionline.com"
+# Set these in Cloudflare Pages dashboard or wrangler secrets, do not commit real values:
+# ADMIN_PASSWORD = "change-me"
+# ADMIN_SESSION_SECRET = "openssl-rand-hex-32"

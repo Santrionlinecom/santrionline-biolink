@@ -1,0 +1,26 @@
+{
+  "name": "santrionline-biolink",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "cf:dev": "wrangler pages dev .svelte-kit/cloudflare --d1=BIOLINK_DB --compatibility-date=2026-06-30",
+    "db:migrate:local": "wrangler d1 migrations apply santrionline-biolink-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply santrionline-biolink-db --remote",
+    "deploy": "npm run build && wrangler pages deploy .svelte-kit/cloudflare --project-name santrionline-biolink"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-cloudflare": "latest",
+    "@sveltejs/kit": "latest",
+    "@sveltejs/vite-plugin-svelte": "latest",
+    "svelte": "latest",
+    "svelte-check": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "wrangler": "latest"
+  }
+}
