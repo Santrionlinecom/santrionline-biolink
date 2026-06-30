@@ -5,6 +5,7 @@ import { getAllLinks, getDb, getProfile } from '$lib/server/db';
 
 type StatRow = { link_id: number; clicks: number; unique_clicks: number; last_click: string | null };
 type SourceRow = { referrer: string | null; clicks: number };
+type DailyRow = { date: string; clicks: number; unique_clicks: number };
 
 export const load: PageServerLoad = async ({ cookies, platform }) => {
   await requireAdmin(cookies, platform);
@@ -13,17 +14,33 @@ export const load: PageServerLoad = async ({ cookies, platform }) => {
 
   let stats: StatRow[] = [];
   let sources: SourceRow[] = [];
+  let dailyStats: DailyRow[] = [];
   let totalClicks = 0;
   let clicks7d = 0;
 
   if (db) {
     stats = (await db.prepare(`SELECT link_id, COUNT(*) AS clicks, COUNT(DISTINCT visitor_hash) AS unique_clicks, MAX(clicked_at) AS last_click FROM click_events GROUP BY link_id`).all<StatRow>()).results ?? [];
     sources = (await db.prepare(`SELECT COALESCE(NULLIF(referrer, ''), 'Direct') AS referrer, COUNT(*) AS clicks FROM click_events GROUP BY COALESCE(NULLIF(referrer, ''), 'Direct') ORDER BY clicks DESC LIMIT 8`).all<SourceRow>()).results ?? [];
+    dailyStats = (await db.prepare(`
+      WITH RECURSIVE days(date) AS (
+        SELECT date('now', '-13 days')
+        UNION ALL
+        SELECT date(date, '+1 day') FROM days WHERE date < date('now')
+      )
+      SELECT
+        days.date AS date,
+        COUNT(click_events.id) AS clicks,
+        COUNT(DISTINCT click_events.visitor_hash) AS unique_clicks
+      FROM days
+      LEFT JOIN click_events ON date(click_events.clicked_at) = days.date
+      GROUP BY days.date
+      ORDER BY days.date ASC
+    `).all<DailyRow>()).results ?? [];
     totalClicks = Number((await db.prepare('SELECT COUNT(*) AS count FROM click_events').first<{ count: number }>())?.count ?? 0);
     clicks7d = Number((await db.prepare("SELECT COUNT(*) AS count FROM click_events WHERE clicked_at >= datetime('now', '-7 days')").first<{ count: number }>())?.count ?? 0);
   }
 
-  return { profile, links, stats, sources, totalClicks, clicks7d, hasDb: Boolean(db) };
+  return { profile, links, stats, sources, dailyStats, totalClicks, clicks7d, hasDb: Boolean(db) };
 };
 
 function asString(form: FormData, key: string) {

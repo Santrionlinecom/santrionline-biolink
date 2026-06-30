@@ -3,6 +3,21 @@
 
   const statByLink = $derived(new Map(data.stats.map((row) => [row.link_id, row])));
   const previewLinks = $derived(data.links.filter((link) => link.is_active));
+  const chartMax = $derived(Math.max(1, ...data.dailyStats.map((day) => day.clicks)));
+  const chartPoints = $derived(
+    data.dailyStats
+      .map((day, index) => {
+        const x = data.dailyStats.length === 1 ? 50 : (index / (data.dailyStats.length - 1)) * 100;
+        const y = 92 - (day.clicks / chartMax) * 76;
+        return `${x.toFixed(2)},${y.toFixed(2)}`;
+      })
+      .join(' ')
+  );
+  const chartArea = $derived(`0,100 ${chartPoints} 100,100`);
+  const bestDay = $derived(data.dailyStats.reduce((best, day) => (day.clicks > best.clicks ? day : best), data.dailyStats[0] ?? { date: '-', clicks: 0, unique_clicks: 0 }));
+  const lastDay = $derived(data.dailyStats.at(-1) ?? { clicks: 0, unique_clicks: 0 });
+  const previousDay = $derived(data.dailyStats.at(-2) ?? { clicks: 0, unique_clicks: 0 });
+  const trendDelta = $derived(lastDay.clicks - previousDay.clicks);
 </script>
 
 <svelte:head><title>Dashboard | SantriOnline Links</title></svelte:head>
@@ -31,6 +46,58 @@
       <article><span>Total Klik</span><strong>{data.totalClicks}</strong></article>
       <article><span>Klik 7 Hari</span><strong>{data.clicks7d}</strong></article>
       <article><span>Jumlah Link</span><strong>{data.links.length}</strong></article>
+    </section>
+
+    <section class="panel analytics-hero">
+      <div class="panel-heading">
+        <div>
+          <h2>Grafik Klik 14 Hari</h2>
+          <p>Naik-turun trafik harian dari semua link, model insight seperti Bitly/Librelinks.</p>
+        </div>
+        <div class:up={trendDelta >= 0} class:down={trendDelta < 0} class="trend-pill">
+          {trendDelta >= 0 ? '↗' : '↘'} {Math.abs(trendDelta)} vs kemarin
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-summary">
+          <div><span>Hari ini</span><strong>{lastDay.clicks}</strong><small>{lastDay.unique_clicks} unik</small></div>
+          <div><span>Tertinggi</span><strong>{bestDay.clicks}</strong><small>{bestDay.date}</small></div>
+          <div><span>Periode</span><strong>14</strong><small>hari terakhir</small></div>
+        </div>
+
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="traffic-chart" aria-label="Grafik klik harian 14 hari">
+          <defs>
+            <linearGradient id="chartLine" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stop-color="#22c55e" />
+              <stop offset="55%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#a78bfa" />
+            </linearGradient>
+            <linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.34" />
+              <stop offset="100%" stop-color="#22c55e" stop-opacity="0.02" />
+            </linearGradient>
+          </defs>
+          <polyline points={chartArea} class="chart-fill" />
+          <polyline points={chartPoints} class="chart-line" />
+          {#each data.dailyStats as day, index}
+            {@const x = data.dailyStats.length === 1 ? 50 : (index / (data.dailyStats.length - 1)) * 100}
+            {@const y = 92 - (day.clicks / chartMax) * 76}
+            <circle cx={x} cy={y} r="1.8" class:hot-dot={day.clicks === bestDay.clicks && day.clicks > 0}>
+              <title>{day.date}: {day.clicks} klik, {day.unique_clicks} unik</title>
+            </circle>
+          {/each}
+        </svg>
+
+        <div class="chart-days">
+          {#each data.dailyStats as day}
+            <div class:active-day={day.clicks === bestDay.clicks && day.clicks > 0}>
+              <span>{day.date.slice(5)}</span>
+              <strong>{day.clicks}</strong>
+            </div>
+          {/each}
+        </div>
+      </div>
     </section>
 
     <div class="admin-main-grid">
