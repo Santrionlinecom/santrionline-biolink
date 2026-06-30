@@ -1,11 +1,12 @@
 name = "santrionline-biolink"
 compatibility_date = "2026-06-30"
+compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".svelte-kit/cloudflare"
 
 [[d1_databases]]
 binding = "BIOLINK_DB"
 database_name = "santrionline-biolink-db"
-database_id = "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID"
+database_id = "7ba4f688-a316-42ce-a2eb-536e595fae72"
 
 [vars]
 PUBLIC_SITE_URL = "https://santrionline.my.id"
