@@ -29,7 +29,7 @@ export const fallbackProfile: Profile = {
   username: 'santrionline',
   display_name: 'Mas Yogik • SantriOnline',
   bio: 'Owner SantriOnline, developer, guru TPQ, dan penggerak pembinaan generasi muslim digital.',
-  avatar_url: null,
+  avatar_url: '/images/mas-yogik-profile.webp',
   location: 'Batu, Jawa Timur',
   primary_cta_text: 'Buka SantriOnline.com',
   primary_cta_url: 'https://santrionline.com',
