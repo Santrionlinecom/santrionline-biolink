@@ -10,6 +10,11 @@ export const GRUP_APP: Grup[] = [
 	{ id: 'belajar', judul: 'Belajar & Ngaji', ikon: '📖', item: [
 		{ href: APP + "/kitab", label: "Perpustakaan Kitab", ket: "Kitab turats, belajar per bab" },
 		{ href: APP + "/kitab/quran", label: "Mushaf Al-Qur\u2019an", ket: "30 juz dan materi tadabbur" },
+		{ href: APP + "/al-quran", label: "Al-Qur\u2019an 114 Surat", ket: "Arab, latin, dan artinya" },
+		{ href: APP + "/al-quran/yasin", label: "Surat Yasin", ket: "83 ayat, latin dan artinya" },
+		{ href: APP + "/al-quran/al-mulk", label: "Surat Al-Mulk", ket: "30 ayat, latin dan artinya" },
+		{ href: APP + "/al-quran/al-kahfi", label: "Surat Al-Kahfi", ket: "Bacaan hari Jumat" },
+		{ href: APP + "/al-quran/ayat-kursi", label: "Ayat Kursi", ket: "Al-Baqarah 255, latin dan artinya" },
 		{ href: APP + "/tanya", label: "Tanya Kitab", ket: "Dijawab dengan kutipan 188 kitab" },
 		{ href: APP + "/buku", label: "Buku Digital", ket: "Karya santri dan penulis muslim" },
 		{ href: APP + "/kursus", label: "Kursus", ket: "Materi bertahap, gratis & koin" },
