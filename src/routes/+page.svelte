@@ -1,7 +1,7 @@
 <script lang="ts">
   import '../styles/beranda.css';
   import { onMount } from 'svelte';
-  import { APP, GRUP_APP, JUMLAH_HALAMAN_APP, SITUS, SOSMED, TOPIK } from '$lib/jaringan';
+  import { APP, GRUP_APP, JUMLAH_HALAMAN_APP, JUMLAH_KITAB, KITAB_TANYA, SITUS, SOSMED, TOPIK } from '$lib/jaringan';
 
   let { data } = $props();
 
@@ -13,11 +13,12 @@
   // Angka yang dihitung naik saat terlihat — semuanya fakta, bukan klaim
   const ANGKA = [
     { n: JUMLAH_HALAMAN_APP, akhiran: '+', ket: 'halaman di app' },
-    { n: 188, akhiran: '', ket: 'kitab rujukan Tanya Kitab' },
-    { n: 30, akhiran: '', ket: 'juz mushaf digital' },
-    { n: 25, akhiran: '', ket: 'rasul dikenalkan' }
+    { n: JUMLAH_KITAB, akhiran: '', ket: 'kitab di perpustakaan' },
+    { n: parseInt(KITAB_TANYA), akhiran: '+', ket: 'kitab rujukan Tanya Kitab' },
+    { n: 30, akhiran: '', ket: 'juz mushaf digital' }
   ];
-  let hitung = $state(ANGKA.map(() => 0));
+  // Mulai dari angka asli: HTML server (SEO / tanpa JS) langsung menampilkan fakta, bukan 0.
+  let hitung = $state(ANGKA.map((a) => a.n));
 
   const TITIK = Array.from({ length: 22 }, (_, i) => ({
     x: (i * 37) % 100,
@@ -100,7 +101,7 @@
 
 <svelte:head>
   <title>{data.profile.display_name} — SantriOnline Network</title>
-  <meta name="description" content="{data.profile.bio} Jelajahi semua halaman SantriOnline: kitab, mushaf, tokoh, TPQ, buku digital, video, dan sosial media Mas Yogik." />
+  <meta name="description" content="{data.profile.bio} Belajar di SantriOnline gratis. Jelajahi semua halaman SantriOnline: {JUMLAH_KITAB} kitab, mushaf, Tes Tipe Santri, tokoh, TPQ, buku digital, video, dan sosial media Mas Yogik." />
   <link rel="canonical" href="https://santrionline.my.id/" />
   <meta property="og:type" content="profile" />
   <meta property="og:title" content="{data.profile.display_name} — SantriOnline Network" />
@@ -157,6 +158,7 @@
       {/if}
       <a class="cta kedua" href="#jelajah">Jelajahi {JUMLAH_HALAMAN_APP} halaman app ↓</a>
     </div>
+    <p class="gratis muncul" use:muncul={460}>✓ Belajar di SantriOnline gratis, tidak dipungut biaya · <a href="https://santrionline.com/tipe-santri">Cek Tipe Santri kamu →</a></p>
   </section>
 
   <!-- MARQUEE TOPIK -->
@@ -215,6 +217,7 @@
   <!-- JARINGAN SITUS -->
   <section class="blok">
     <h2 class="blok-judul muncul" use:muncul><span>🌐</span> Jaringan SantriOnline</h2>
+    <p class="blok-sub muncul" use:muncul={60}>Semua tahap belajar 01–04 gratis. Mulai dari tes Tipe Santri, lalu pelajaran pertama.</p>
     <div class="situs">
       {#each SITUS as s, i}
         <a class="kartu besar muncul" use:muncul={i * 90} onpointermove={sorot} href={s.href}>

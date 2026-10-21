@@ -49,6 +49,8 @@ body{background:var(--tinta);overflow-x:hidden}
 @keyframes melayang{50%{translate:0 -4px}}
 
 .cta-baris{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
+.gratis{margin:16px auto 0;max-width:34rem;font-size:14px;font-weight:700;color:#a7f3d0}
+.gratis a{color:#6ee7b7;white-space:nowrap}
 .cta{display:inline-flex;align-items:center;gap:8px;min-height:50px;padding:0 22px;border-radius:16px;font-weight:800;text-decoration:none;transition:transform .2s,box-shadow .2s}
 .cta.utama{position:relative;overflow:hidden;background:linear-gradient(135deg,#ecfdf5,#a7f3d0);color:#064e3b;box-shadow:0 12px 34px #10b98155}
 .cta.utama::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,#ffffffcc 50%,transparent 70%);transform:translateX(-120%);animation:sapu 3.2s ease-in-out infinite}

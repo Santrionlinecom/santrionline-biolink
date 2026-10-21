@@ -8,16 +8,20 @@ export type Grup = { id: string; judul: string; ikon: string; item: Tautan[] };
 
 export const GRUP_APP: Grup[] = [
 	{ id: 'belajar', judul: 'Belajar & Ngaji', ikon: '📖', item: [
-		{ href: APP + "/kitab", label: "Perpustakaan Kitab", ket: "Kitab turats, belajar per bab" },
+		{ href: APP + "/kitab", label: "Perpustakaan Kitab", ket: "206 kitab turats, belajar per bab" },
 		{ href: APP + "/kitab/quran", label: "Mushaf Al-Qur\u2019an", ket: "30 juz dan materi tadabbur" },
 		{ href: APP + "/al-quran", label: "Al-Qur\u2019an 114 Surat", ket: "Arab, latin, dan artinya" },
 		{ href: APP + "/al-quran/yasin", label: "Surat Yasin", ket: "83 ayat, latin dan artinya" },
 		{ href: APP + "/al-quran/al-mulk", label: "Surat Al-Mulk", ket: "30 ayat, latin dan artinya" },
 		{ href: APP + "/al-quran/al-kahfi", label: "Surat Al-Kahfi", ket: "Bacaan hari Jumat" },
 		{ href: APP + "/al-quran/ayat-kursi", label: "Ayat Kursi", ket: "Al-Baqarah 255, latin dan artinya" },
-		{ href: APP + "/tanya", label: "Tanya Kitab", ket: "Dijawab dengan kutipan 188 kitab" },
-		{ href: APP + "/buku", label: "Buku Digital", ket: "Karya santri dan penulis muslim" },
-		{ href: APP + "/kursus", label: "Kursus", ket: "Materi bertahap, gratis & koin" },
+		{ href: APP + "/asmaul-husna", label: "Asmaul Husna", ket: "99 nama Allah, makna & teladan" },
+		{ href: APP + "/hadits-arbain", label: "Hadits Arbain", ket: "42 hadits pokok agama" },
+		{ href: APP + "/ibadah", label: "Doa, Niat & Tata Cara", ket: "Bacaan ibadah dengan rujukan kitab" },
+		{ href: APP + "/tanya", label: "Tanya Kitab", ket: "Kutipan 190+ kitab, 10 pertanyaan gratis/hari" },
+		{ href: APP + "/kursus", label: "Kursus", ket: "Materi bertahap, semuanya gratis" },
+		{ href: APP + "/les", label: "Les", ket: "Les daring & tatap muka" },
+		{ href: APP + "/buku", label: "Buku Digital", ket: "8 novel religi, 10 bab pertama gratis" },
 		{ href: APP + "/video", label: "Video", ket: "Kajian, kisah santri, aplikasi" },
 		{ href: APP + "/blog", label: "Blog & Konten", ket: "Artikel pembinaan generasi" },
 	] },
@@ -34,7 +38,9 @@ export const GRUP_APP: Grup[] = [
 	] },
 	{ id: 'sejarah', judul: 'Sejarah & Ormas', ikon: '🏛️', item: [
 		{ href: APP + "/dinasti", label: "Dinasti Islam", ket: "Peta sejarah peradaban Islam" },
+		{ href: APP + "/dunia-zaman-nabi", label: "Zaman Nabi \ufdfa", ket: "Dunia \u00b1 570\u2013632 M dan raja-raja sezaman" },
 		{ href: APP + "/ormas", label: "Ormas Islam", ket: "NU, Muhammadiyah, ormas dunia" },
+		{ href: APP + "/hari-santri", label: "Hari Santri 2026", ket: "Twibbon, logo, sejarah & ucapan" },
 	] },
 	{ id: 'lembaga', judul: 'Untuk Lembaga', ikon: '🕌', item: [
 		{ href: APP + "/tpq", label: "TPQ", ket: "Pendaftaran & profil lembaga" },
@@ -42,11 +48,11 @@ export const GRUP_APP: Grup[] = [
 		{ href: APP + "/rumah-tahfidz", label: "Rumah Tahfidz", ket: "Setoran & hafalan lebih tertata" },
 		{ href: APP + "/masjid", label: "Masjid", ket: "Takmir & kegiatan lebih tertata" },
 		{ href: APP + "/musholla", label: "Musholla", ket: "Musholla lebih tertata" },
+		{ href: APP + "/alat/proposal-bantuan-masjid", label: "Proposal Bantuan Masjid", ket: "Alat gratis; pengajuan SIMAS s.d. 25 Okt 2026" },
 		{ href: APP + "/kalender", label: "Kalender Hijriyah", ket: "Agenda & hari besar Islam" },
 	] },
 	{ id: 'produk', judul: 'Produk & Kreatif', ikon: '✨', item: [
-		{ href: APP + "/digital-store", label: "Digital Store", ket: "Aplikasi & produk digital" },
-		{ href: APP + "/desain", label: "Desain", ket: "Desain siap pakai untuk event & lembaga" },
+		{ href: APP + "/digital-store", label: "Digital Store", ket: "SantriPrint, Rekam, Maly, Fokus: gratis & Pro" },
 		{ href: APP + "/fitur", label: "Fitur", ket: "Semua fitur SantriOnline" },
 		{ href: APP + "/promosi", label: "AI Ngaji Kitab", ket: "AI yang ngaji kitab dulu sebelum jawab" },
 	] },
@@ -60,8 +66,15 @@ export const GRUP_APP: Grup[] = [
 
 export const JUMLAH_HALAMAN_APP = GRUP_APP.reduce((n, g) => n + g.item.length, 0);
 
+// Fakta di bawah dicek ke situs live 22 Okt 2026. Ubah angka di sini bila data app berubah.
+export const JUMLAH_KITAB = 206; // kitab_catalog di app (= "206 kitab di perpustakaan" santrionline.com)
+export const KITAB_TANYA = '190+'; // klaim Tanya Kitab di header app.santrionline.com
+
 export const SITUS = [
-	{ href: 'https://santrionline.com', label: 'SantriOnline.com', ket: 'Etalase: kitab, buku, aplikasi', ikon: '🌐' },
+	{ href: 'https://santrionline.com', label: 'SantriOnline.com', ket: 'Belajar Islam dari nol, gratis tanpa biaya', ikon: '🌐' },
+	{ href: 'https://santrionline.com/tipe-santri', label: 'Tes Tipe Santri', ket: '7 tipe cara belajar, 3 menit, tanpa login', ikon: '🧩' },
+	{ href: 'https://santrionline.com/video', label: 'Video SantriOnline', ket: 'Kajian, kisah santri, sejarah Islam', ikon: '🎬' },
+	{ href: 'https://santrionline.com/katalog/semua', label: 'Katalog', ket: '206 kitab, novel, aplikasi, kursus', ikon: '📚' },
 	{ href: APP, label: 'app.santrionline.com', ket: 'Aplikasi belajar & lembaga', ikon: '📱' },
 	{ href: 'https://masyogik.santrionline.com', label: 'Jasa Mas Yogik', ket: 'Web, aplikasi, otomasi, AI', ikon: '🛠️' }
 ];

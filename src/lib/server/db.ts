@@ -37,8 +37,8 @@ export const fallbackProfile: Profile = {
 };
 
 export const fallbackLinks: LinkRow[] = [
-  { id: 1, slug: 'santrionline', title: 'SantriOnline.com', description: 'Platform pembinaan generasi muslim.', url: 'https://santrionline.com', icon: '🕌', category: 'Utama', sort_order: 1, is_active: 1, created_at: '', updated_at: '' },
-  { id: 2, slug: 'app', title: 'App SantriOnline', description: 'Dashboard lembaga/TPQ.', url: 'https://app.santrionline.com', icon: '📚', category: 'Produk', sort_order: 2, is_active: 1, created_at: '', updated_at: '' },
+  { id: 1, slug: 'santrionline', title: 'SantriOnline.com', description: 'Belajar Islam dari nol, gratis tanpa biaya. 206 kitab, Tes Tipe Santri, video.', url: 'https://santrionline.com', icon: '🕌', category: 'Utama', sort_order: 1, is_active: 1, created_at: '', updated_at: '' },
+  { id: 2, slug: 'app', title: 'App SantriOnline', description: 'Kitab, Al-Qur’an, Tanya Kitab, kursus gratis, dan dashboard lembaga/TPQ.', url: 'https://app.santrionline.com', icon: '📚', category: 'Produk', sort_order: 2, is_active: 1, created_at: '', updated_at: '' },
   { id: 3, slug: 'whatsapp', title: 'WhatsApp Mas Yogik', description: 'Hubungi untuk kerja sama.', url: 'https://wa.me/6287854545274', icon: '💬', category: 'Kontak', sort_order: 3, is_active: 1, created_at: '', updated_at: '' }
 ];
 
