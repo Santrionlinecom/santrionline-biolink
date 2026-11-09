@@ -37,7 +37,7 @@
     url: 'https://santrionline.my.id',
     image: 'https://santrionline.my.id/images/mas-yogik-profile.webp',
     worksFor: { '@type': 'Organization', name: 'SantriOnline', url: 'https://santrionline.com' },
-    sameAs: [...sameAs, 'https://santrionline.com', APP, 'https://masyogik.santrionline.com']
+    sameAs: [...sameAs, 'https://santrionline.com', APP, 'https://masyogik.santrionline.com', 'https://santrionline.gumroad.com']
   });
 
   function muncul(node: HTMLElement, jeda = 0) {

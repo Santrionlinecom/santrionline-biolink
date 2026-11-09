@@ -53,6 +53,7 @@ export const GRUP_APP: Grup[] = [
 	] },
 	{ id: 'produk', judul: 'Produk & Kreatif', ikon: '✨', item: [
 		{ href: APP + "/digital-store", label: "Digital Store", ket: "SantriPrint, Rekam, Maly, Fokus: gratis & Pro" },
+		{ href: APP + "/katalog-template", label: "Katalog Template Website", ket: "12 template orisinal dengan demo nyata" },
 		{ href: APP + "/fitur", label: "Fitur", ket: "Semua fitur SantriOnline" },
 		{ href: APP + "/promosi", label: "AI Ngaji Kitab", ket: "AI yang ngaji kitab dulu sebelum jawab" },
 	] },
@@ -76,7 +77,8 @@ export const SITUS = [
 	{ href: 'https://santrionline.com/video', label: 'Video SantriOnline', ket: 'Kajian, kisah santri, sejarah Islam', ikon: '🎬' },
 	{ href: 'https://santrionline.com/katalog/semua', label: 'Katalog', ket: '206 kitab, novel, aplikasi, kursus', ikon: '📚' },
 	{ href: APP, label: 'app.santrionline.com', ket: 'Aplikasi belajar & lembaga', ikon: '📱' },
-	{ href: 'https://masyogik.santrionline.com', label: 'Jasa Mas Yogik', ket: 'Web, aplikasi, otomasi, AI', ikon: '🛠️' }
+	{ href: 'https://masyogik.santrionline.com', label: 'Jasa Mas Yogik', ket: 'Web, aplikasi, otomasi, AI', ikon: '🛠️' },
+	{ href: 'https://santrionline.gumroad.com', label: 'Toko Gumroad', ket: 'Template website, ebook & checklist (USD)', ikon: '🛒' }
 ];
 
 export type Sosmed = { id: string; nama: string; akun: string; url: string; warna: string; path: string };
